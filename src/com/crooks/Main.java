@@ -5,36 +5,39 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
         ArrayList<InventoryItem> itemList = new ArrayList<InventoryItem>();
 
-//        HashMap<String, String> passMap = new HashMap<String, String>();
-//        passMap.put("Alice", "asdf");
-//        passMap.put("Bob", "qazwsx");
-//        passMap.put("Charlie", "charlie");
-//        System.out.println("You must sign in before we continue...");
-//        login(scanner, passMap);
+        HashMap<String, String> passMap = new HashMap<String, String>();
+        passMap.put("Alice", "asdf");
+        passMap.put("Bob", "qazwsx");
+        passMap.put("Charlie", "charlie");
+        System.out.println("You must sign in before we continue...");
+        login(passMap);
 
         while(true){
+            listInv( itemList);
             System.out.println("[1]: Add New Item ");
             System.out.println("[2]: Remove an Item ");
             System.out.println("[3]: Adjust Item Quantity ");
+            System.out.println("[4]: View Inventory ");
 
             Integer userInput = scanner.nextInt();
             scanner.nextLine();
-            listInv( itemList);
+
             switch (userInput){
                 case 1:
-                    creatItem(scanner, itemList);
+                    creatItem(itemList);
 
                     break;
                 case 2:
-                    removeItem(scanner, itemList);
+                    removeItem(itemList);
                     break;
                 case 3:
-                    editQuant(scanner, itemList);
+                    editQuant( itemList);
                     break;
                 case 4:
                     listInv(itemList);
@@ -45,7 +48,7 @@ public class Main {
         }
     }
 
-    public static void creatItem(Scanner scanner, ArrayList itemList) {
+    public static void creatItem( ArrayList itemList) {
         //Create New Item
         System.out.println("Enter your Item");
         String text = scanner.nextLine();
@@ -53,11 +56,11 @@ public class Main {
         int num = scanner.nextInt();
         InventoryItem inventoryItem = new InventoryItem(text, num);
         itemList.add(inventoryItem);
-        listInv(itemList);
+
 
     }
 
-    public static void removeItem(Scanner scanner, ArrayList itemList){
+    public static void removeItem( ArrayList itemList){
         //Remove Item
         System.out.println("Which Item would you like to remove?");
         int removeNum = scanner.nextInt();
@@ -74,7 +77,7 @@ public class Main {
         }
     }
 
-    static public void editQuant(Scanner scanner, ArrayList<InventoryItem> itemList){
+    static public void editQuant( ArrayList<InventoryItem> itemList){
         System.out.println("Which item quantity has changed?");
         int selection = scanner.nextInt();
         scanner.nextLine();
@@ -85,31 +88,26 @@ public class Main {
         scanner.nextLine();
 
         inventoryItem.setItemQuantity(updatedQuant);
-
-
     }
 
 
 
-//    public static void login(Scanner scanner, HashMap passMap){
-//
-//        System.out.println("What is your name?");
-//        String tempName = scanner.next();
-//
-//        System.out.println("What is your Password?");
-//        String tempPass = scanner.next();
-//
-//        if (passMap.get(tempName) == tempPass){
-//            System.out.println("Welcome back " + tempName);
-//        }else if (passMap.get(tempName) != tempPass) {
-//            System.out.println("debugging: entered variables =  " + tempName + " : " + tempPass );
-//            System.out.println("debugging: Hashmap passmap =  " + passMap + "\n");
-//            System.out.println("passMap.get(tempName) returns: " + passMap.get(tempName) );
-//            System.out.println("Sorry we don't recognize that Username/Password Combination\n");
-//            login(scanner, passMap);
-//        }else{
-//            System.out.println("You should never reach this");
-//        }
-//
-//    }
+    public static void login(HashMap passMap){
+
+        System.out.println("What is your name?");
+        String tempName = scanner.nextLine();
+
+        System.out.println("What is your Password?");
+        String tempPass = scanner.nextLine();
+
+        if (passMap.get(tempName).equals(tempPass)){
+            System.out.println("Welcome back " + tempName);
+        }else if (passMap.get(tempName) != tempPass) {
+            System.out.println("Sorry we don't recognize that Username/Password Combination\n");
+            login(passMap);
+        }else{
+            System.out.println("You should never reach this");
+        }
+
+    }
 }
