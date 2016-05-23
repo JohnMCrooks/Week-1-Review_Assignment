@@ -53,9 +53,18 @@ public class Main {
         System.out.println("Enter your Item");
         String text = scanner.nextLine();
         System.out.println("How many do you have?");
-        int num = scanner.nextInt();
-        InventoryItem inventoryItem = new InventoryItem(text, num);
-        itemList.add(inventoryItem);
+        try{
+            int num = scanner.nextInt();
+            scanner.nextLine();
+            InventoryItem inventoryItem = new InventoryItem(text, num);
+            itemList.add(inventoryItem);
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+
+        }
+
+
+
 
 
     }
@@ -64,15 +73,18 @@ public class Main {
         //Remove Item
         System.out.println("Which Item would you like to remove?");
         int removeNum = scanner.nextInt();
-        itemList.remove(removeNum-1);
-
+        try {
+            itemList.remove(removeNum - 1);
+        }catch (Exception e){
+            System.out.println("Something went wrong!!!");
+        }
     }
 
     static public void listInv( ArrayList<InventoryItem> itemList){
         //Print Item List
         int i = 1;
         for (InventoryItem item1 : itemList) {
-            System.out.println(i + ". " + item1.itemQuantity + "x " + item1.itemName);
+            System.out.println(i + ". " + item1.itemQuantity + "x " + item1.itemName + "\n");
             i++;
         }
     }
@@ -81,13 +93,18 @@ public class Main {
         System.out.println("Which item quantity has changed?");
         int selection = scanner.nextInt();
         scanner.nextLine();
+        try {
+            InventoryItem inventoryItem = itemList.get(selection - 1);
+            System.out.println("How many do you have?");
+            int updatedQuant = scanner.nextInt();
+            scanner.nextLine();
 
-        InventoryItem inventoryItem = itemList.get(selection-1);
-        System.out.println("How many do you have?");
-        int updatedQuant = scanner.nextInt();
-        scanner.nextLine();
-
-        inventoryItem.setItemQuantity(updatedQuant);
+            inventoryItem.setItemQuantity(updatedQuant);
+        } catch (NumberFormatException e) {
+            System.out.println("You must Use a number! \n");
+        } catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("The Number you selected isn't a valid option \n");
+        }
     }
 
 
