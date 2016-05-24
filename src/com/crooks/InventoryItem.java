@@ -6,10 +6,21 @@ package com.crooks;
 public class InventoryItem {
     String itemName;
     int itemQuantity;
+    String category;
+    int weight;
+
+
+    public InventoryItem(String itemName, int itemQuantity, String category, int weight) {
+        this.itemName = itemName;
+        this.itemQuantity = itemQuantity;
+        this.category = category;
+        this.weight = weight;
+    }
 
     public InventoryItem(String itemName, int itemQuantity) {
         this.itemName = itemName;
         this.itemQuantity = itemQuantity;
+
     }
 
     public InventoryItem() {
@@ -21,5 +32,13 @@ public class InventoryItem {
 
     public void setItemQuantity(int itemQuantity) {
         this.itemQuantity = itemQuantity;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

@@ -32,7 +32,7 @@ public class Main {
 
             switch (userInput){
                 case 1:
-                    creatItem(itemList);
+                    createItem2(itemList);
                     break;
                 case 2:
                     removeItem(itemList);
@@ -53,24 +53,29 @@ public class Main {
 
     public static void login(HashMap passMap){
 
-        System.out.println("What is your name?");
-        String tempName = scanner.nextLine();
-
-        System.out.println("What is your Password?");
-        String tempPass = scanner.nextLine();
-
-        if (passMap.get(tempName).equals(tempPass)){
-            System.out.println("Welcome back " + tempName + "\n");
-        }else if (passMap.get(tempName).equals(tempPass)) {
-            System.out.println("Sorry we don't recognize that Username/Password Combination\n");
-            login(passMap);
-        }else{
-            System.out.println("You should never reach this");
-        }
-
+//        System.out.println("What is your name?");
+//        String tempName = scanner.nextLine();
+//
+//        System.out.println("What is your Password?");
+//        String tempPass = scanner.nextLine();
+//
+//        if(passMap.containsKey(tempName)) {
+//            if (passMap.get(tempName).equals(tempPass)) {
+//                System.out.println("Welcome back " + tempName + "\n");
+//            } else if (passMap.get(tempName).equals(tempPass)) {
+//                System.out.println("Sorry we don't recognize that Username/Password Combination\n");
+//                login(passMap);
+//            } else {
+//                System.out.println("You should never reach this");
+//            }
+//        }else {
+//            System.out.println("Error Name not recognized.\n");
+//            login(passMap);
+//        }
     }
 
-    public static void creatItem( ArrayList itemList) {
+    /*
+         public static void creatItem( ArrayList itemList) {
         //Create New Item
         System.out.println("Enter your Item");
         String text = scanner.nextLine();
@@ -83,7 +88,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Something went wrong.");
         }
-    }
+    }*/
 
     public static void removeItem( ArrayList itemList){
         //Remove Item
@@ -100,7 +105,8 @@ public class Main {
         //Print Item List
         int i = 1;
         for (InventoryItem item1 : itemList) {
-            System.out.println(i + ". " + item1.itemQuantity + "x " + item1.itemName );
+            int totalWeight = (item1.weight *item1.itemQuantity);
+            System.out.print(String.format("%s. %sx %s - %s - %s lbs\n",i,item1.itemQuantity,item1.itemName,item1.category, item1.weight));
             i++;
         }
     }
@@ -127,6 +133,47 @@ public class Main {
         } catch (ArrayIndexOutOfBoundsException e){
             System.out.println("The Number you selected isn't a valid option \n");
         }
+    }
+
+    static public void createItem2(ArrayList itemList){
+
+        System.out.println("Enter your item:");
+        String text = scanner.nextLine();
+
+        System.out.println("How many do You have?");
+        int num = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Category:[Helmet/Body Armor/Weapon/Food/Rune]");
+        String cat = scanner.nextLine();
+        cat = cat.toLowerCase();
+
+        InventoryItem inventoryItem;
+
+        switch (cat){
+            case "helmet":
+                inventoryItem = new Helmet(text, num);
+                break;
+            case "body armor":
+                inventoryItem = new BodyArmor(text, num);
+                break;
+            case "weapon":
+                inventoryItem = new Weapon(text, num);
+                break;
+            case "food":
+                inventoryItem = new Food(text, num);
+                break;
+            case "rune":
+                inventoryItem = new Rune(text, num);
+                break;
+            default:
+                inventoryItem = new InventoryItem(text, num, "Unknown", 1);
+                break;
+        }
+        itemList.add(inventoryItem);
+        System.out.println(" ");
+
+
     }
 
 
