@@ -20,6 +20,8 @@ public class Main {
 
         while(true){
             listInv( itemList);
+
+            System.out.println("      Options:\n");
             System.out.println("[1]: Add New Item ");
             System.out.println("[2]: Remove an Item ");
             System.out.println("[3]: Adjust Item Quantity ");
@@ -31,7 +33,6 @@ public class Main {
             switch (userInput){
                 case 1:
                     creatItem(itemList);
-
                     break;
                 case 2:
                     removeItem(itemList);
@@ -40,12 +41,33 @@ public class Main {
                     editQuant( itemList);
                     break;
                 case 4:
+                    System.out.println("Your inventory consists of the following Items:");
                     listInv(itemList);
-
+                    System.out.println("What else would you like to do?\n");
+                    break;
                 default:
-                    System.out.println("Invalid input!!!!");
+                    System.out.println("Invalid input! You Must Choose a number from above!");
             }
         }
+    }
+
+    public static void login(HashMap passMap){
+
+        System.out.println("What is your name?");
+        String tempName = scanner.nextLine();
+
+        System.out.println("What is your Password?");
+        String tempPass = scanner.nextLine();
+
+        if (passMap.get(tempName).equals(tempPass)){
+            System.out.println("Welcome back " + tempName + "\n");
+        }else if (passMap.get(tempName).equals(tempPass)) {
+            System.out.println("Sorry we don't recognize that Username/Password Combination\n");
+            login(passMap);
+        }else{
+            System.out.println("You should never reach this");
+        }
+
     }
 
     public static void creatItem( ArrayList itemList) {
@@ -60,13 +82,7 @@ public class Main {
             itemList.add(inventoryItem);
         } catch (Exception e) {
             System.out.println("Something went wrong.");
-
         }
-
-
-
-
-
     }
 
     public static void removeItem( ArrayList itemList){
@@ -84,12 +100,13 @@ public class Main {
         //Print Item List
         int i = 1;
         for (InventoryItem item1 : itemList) {
-            System.out.println(i + ". " + item1.itemQuantity + "x " + item1.itemName + "\n");
+            System.out.println(i + ". " + item1.itemQuantity + "x " + item1.itemName );
             i++;
         }
     }
 
     static public void editQuant( ArrayList<InventoryItem> itemList){
+        //Passing the
         System.out.println("Which item quantity has changed?");
         int selection = scanner.nextInt();
         scanner.nextLine();
@@ -108,23 +125,4 @@ public class Main {
     }
 
 
-
-    public static void login(HashMap passMap){
-
-        System.out.println("What is your name?");
-        String tempName = scanner.nextLine();
-
-        System.out.println("What is your Password?");
-        String tempPass = scanner.nextLine();
-
-        if (passMap.get(tempName).equals(tempPass)){
-            System.out.println("Welcome back " + tempName);
-        }else if (passMap.get(tempName) != tempPass) {
-            System.out.println("Sorry we don't recognize that Username/Password Combination\n");
-            login(passMap);
-        }else{
-            System.out.println("You should never reach this");
-        }
-
-    }
 }
