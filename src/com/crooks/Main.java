@@ -42,8 +42,7 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Your inventory consists of the following Items:");
-                    listInv(itemList);
-                    System.out.println("What else would you like to do?\n");
+
                     break;
                 default:
                     System.out.println("Invalid input! You Must Choose a number from above!");
@@ -53,29 +52,28 @@ public class Main {
 
     public static void login(HashMap passMap){
 
-//        System.out.println("What is your name?");
-//        String tempName = scanner.nextLine();
-//
-//        System.out.println("What is your Password?");
-//        String tempPass = scanner.nextLine();
-//
-//        if(passMap.containsKey(tempName)) {
-//            if (passMap.get(tempName).equals(tempPass)) {
-//                System.out.println("Welcome back " + tempName + "\n");
-//            } else if (passMap.get(tempName).equals(tempPass)) {
-//                System.out.println("Sorry we don't recognize that Username/Password Combination\n");
-//                login(passMap);
-//            } else {
-//                System.out.println("You should never reach this");
-//            }
-//        }else {
-//            System.out.println("Error Name not recognized.\n");
-//            login(passMap);
-//        }
-    }
+        System.out.println("What is your name?");
+        String tempName = scanner.nextLine();
 
-    /*
-         public static void creatItem( ArrayList itemList) {
+        System.out.println("What is your Password?");
+        String tempPass = scanner.nextLine();
+
+        if(passMap.containsKey(tempName)) {
+            if (passMap.get(tempName).equals(tempPass)) {
+                System.out.println("Welcome back " + tempName + "\n");
+            } else {
+                System.out.println("Sorry we don't recognize that Username/Password Combination\n");
+                login(passMap);
+            }
+        }else {
+            System.out.println("Error Name not recognized.\n");
+            login(passMap);
+        }
+    }
+/*
+    ----Original Create Item Method - Updated below to meet assignment requirements ----
+
+    public static void creatItem( ArrayList itemList) {
         //Create New Item
         System.out.println("Enter your Item");
         String text = scanner.nextLine();
@@ -88,7 +86,8 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Something went wrong.");
         }
-    }*/
+     }
+*/
 
     public static void removeItem( ArrayList itemList){
         //Remove Item
@@ -106,7 +105,7 @@ public class Main {
         int i = 1;
         for (InventoryItem item1 : itemList) {
             int totalWeight = (item1.weight *item1.itemQuantity);
-            System.out.print(String.format("%s. %sx %s - %s - %s lbs\n",i,item1.itemQuantity,item1.itemName,item1.category, item1.weight));
+            System.out.print(String.format("%s. %sx %s - %s - %s lbs\n",i,item1.itemQuantity,item1.itemName,item1.category, (item1.weight*item1.itemQuantity)));
             i++;
         }
     }
@@ -171,9 +170,6 @@ public class Main {
                 break;
         }
         itemList.add(inventoryItem);
-        System.out.println(" ");
-
-
     }
 
 
