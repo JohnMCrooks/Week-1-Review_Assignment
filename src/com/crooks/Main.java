@@ -22,10 +22,11 @@ public class Main {
             listInv( itemList);
 
             System.out.println("      Options:\n");
-            System.out.println("[1]: Add New Item ");
-            System.out.println("[2]: Remove an Item ");
-            System.out.println("[3]: Adjust Item Quantity ");
-            System.out.println("[4]: View Inventory ");
+            System.out.println("[1]: Add New Item");
+            System.out.println("[2]: Remove an Item");
+            System.out.println("[3]: Adjust Item Quantity");
+            System.out.println("[4]: View Inventory");
+            System.out.println("[5]: Check Weight");
 
             Integer userInput = scanner.nextInt();
             scanner.nextLine();
@@ -42,7 +43,9 @@ public class Main {
                     break;
                 case 4:
                     System.out.println("Your inventory consists of the following Items:");
-
+                    break;
+                case 5:
+                    checkWeight(itemList);
                     break;
                 default:
                     System.out.println("Invalid input! You Must Choose a number from above!");
@@ -136,40 +139,58 @@ public class Main {
 
     static public void createItem2(ArrayList itemList){
 
-        System.out.println("Enter your item:");
-        String text = scanner.nextLine();
+        if (!checkWeight(itemList)){
 
-        System.out.println("How many do You have?");
-        int num = scanner.nextInt();
-        scanner.nextLine();
+            System.out.println("Enter your item:");
+            String text = scanner.nextLine();
 
-        System.out.println("Category:[Helmet/Body Armor/Weapon/Food/Rune]");
-        String cat = scanner.nextLine();
-        cat = cat.toLowerCase();
+            System.out.println("How many do You have?");
+            int num = scanner.nextInt();
+            scanner.nextLine();
 
-        InventoryItem inventoryItem;
+            System.out.println("Category:[Helmet/Body Armor/Weapon/Food/Rune]");
+            String cat = scanner.nextLine();
+            cat = cat.toLowerCase();
 
-        switch (cat){
-            case "helmet":
-                inventoryItem = new Helmet(text, num);
-                break;
-            case "body armor":
-                inventoryItem = new BodyArmor(text, num);
-                break;
-            case "weapon":
-                inventoryItem = new Weapon(text, num);
-                break;
-            case "food":
-                inventoryItem = new Food(text, num);
-                break;
-            case "rune":
-                inventoryItem = new Rune(text, num);
-                break;
-            default:
-                inventoryItem = new InventoryItem(text, num, "Unknown", 1);
-                break;
+            InventoryItem inventoryItem;
+
+            switch (cat){
+                case "helmet":
+                    inventoryItem = new Helmet(text, num);
+                    break;
+                case "body armor":
+                    inventoryItem = new BodyArmor(text, num);
+                    break;
+                case "weapon":
+                    inventoryItem = new Weapon(text, num);
+                    break;
+                case "food":
+                    inventoryItem = new Food(text, num);
+                    break;
+                case "rune":
+                    inventoryItem = new Rune(text, num);
+                    break;
+                default:
+                    inventoryItem = new InventoryItem(text, num, "Unknown", 1);
+                    break;
+            }
+            itemList.add(inventoryItem);
+        }else {
+            System.out.println("\nyou can't carry more than 10 lbs at once. \nRemove an Item or drop a few before adding more...\n");
         }
-        itemList.add(inventoryItem);
+    }
+
+    static public Boolean checkWeight(ArrayList<InventoryItem> itemList){
+        int i = 1;
+        int totalWeight = 0;
+        for (InventoryItem item1 : itemList) {
+            totalWeight = totalWeight + (item1.weight * item1.itemQuantity);
+            i++;
+        }
+        System.out.printf("You are carrying %s Pounds\n", totalWeight);
+        if (totalWeight >= 10){return true;}
+        else {return false;}
+
     }
 
 
