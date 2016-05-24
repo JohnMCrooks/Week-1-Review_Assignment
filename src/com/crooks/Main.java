@@ -60,7 +60,7 @@ public class Main {
 
         if(passMap.containsKey(tempName)) {
             if (passMap.get(tempName).equals(tempPass)) {
-                System.out.println("Welcome back " + tempName + "\n");
+                System.out.printf("Welcome back %s\n",tempName);
             } else {
                 System.out.println("Sorry we don't recognize that Username/Password Combination\n");
                 login(passMap);
