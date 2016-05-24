@@ -111,15 +111,17 @@ public class Main {
         int selection = scanner.nextInt();
         scanner.nextLine();
         try {
-            //setting a new placeholder class object [inventoryItem] to hold the the class object
-            // retrieved from the ArrayList [itemList] by using an index number and .get()
+            //creating a new placeholder class object [inventoryItem] to hold the the class object retrieved...
+            // ...from the ArrayList [itemList] by using an index number and the .get() method
             InventoryItem inventoryItem = itemList.get(selection - 1);
             System.out.println("How many do you have?");
             int updatedQuant = scanner.nextInt();
             scanner.nextLine();
+
             // updating Class object [inventoryItem] via class setter method will mutate the ArrayList
             // as necessary and thus doesn't require a specific itemList.set() method invoked
             inventoryItem.setItemQuantity(updatedQuant);
+
         } catch (NumberFormatException e) {
             System.out.println("You must Use a number! \n");
         } catch (ArrayIndexOutOfBoundsException e){
