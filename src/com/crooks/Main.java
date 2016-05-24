@@ -16,7 +16,12 @@ public class Main {
         passMap.put("Bob", "qazwsx");
         passMap.put("Charlie", "charlie");
         System.out.println("You must sign in before we continue...");
-        login(passMap);
+
+        String temp = "Sword";
+
+        String temp1 = temp.concat("s");
+        System.out.println(temp1);
+        //login(passMap);
 
         while(true){
             listInv( itemList);
@@ -144,13 +149,18 @@ public class Main {
             System.out.println("Enter your item:");
             String text = scanner.nextLine();
 
+            System.out.println("Category:[Helmet/Body Armor/Weapon/Food/Rune]");
+            String cat = scanner.nextLine();
+            cat = cat.toLowerCase();
+
             System.out.println("How many do You have?");
             int num = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.println("Category:[Helmet/Body Armor/Weapon/Food/Rune]");
-            String cat = scanner.nextLine();
-            cat = cat.toLowerCase();
+            if (num != 1){
+                String temp = text.concat("s");
+                text = temp;
+            }
 
             InventoryItem inventoryItem;
 
